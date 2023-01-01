@@ -14,9 +14,10 @@ async function main() {
   const simpleStorage = await SimpleStorageFactory.deploy();
   await simpleStorage.deployed();
   console.log(`Deployed contract to: ${simpleStorage.address}`);
+
   //what happens when we deploy to hardhat network
   if (network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY) {
-    await simpleStorage.deployTransaction.wait(6);
+    await simpleStorage.deployTransaction.wait(6); //waiting for 6 blocks to be mined
     await verify(simpleStorage.address, []);
     console.log("Contract verified successfully");
   }

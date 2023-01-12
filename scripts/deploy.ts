@@ -5,7 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
-const { ethers, run, network } = require("hardhat");
+import { ethers, run, network } from "hardhat";
 
 async function main() {
   const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage");
@@ -34,14 +34,14 @@ async function main() {
 }
 
 // Verify function
-async function verify(contractAddress, args) {
+async function verify(contractAddress: string, args: any[]) {
   console.log("Verifying contract ....");
   try {
     await run("verify:verify", {
       address: contractAddress,
       constructorArguments: args,
     });
-  } catch (e) {
+  } catch (e: any) {
     if (e.message.toLowerCase().includes("already verified")) {
       console.log("Already Verified!");
     } else {
